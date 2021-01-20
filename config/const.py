@@ -2,6 +2,7 @@ class Basic:
     weather_api = 'http://apis.juhe.cn/simpleWeather/query'
     weather_key_juhe = 'b28631a343502616434a0ccf8f75ad17'
 
-if __name__=='__main__':
-    _v = Basic()
-    print('测试',_v.weather_key_juhe)
+    appid='wx2e737b101ab26f88'
+    appsecret='ce667216f49f377728e37febf56d7f94'
+    weachat_openid_url = 'https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&grant_type=authorization_code' %(appid,appsecret)
+
