@@ -6,7 +6,7 @@ class User(models.Model):
     openid = models.CharField(unique=True,max_length=100)
     wechat_photo = models.CharField(max_length=200,null=True)
     address = models.CharField(max_length=200,null=True)
-    gender = models.IntegerField(max_length=1,null=True)
+    gender = models.IntegerField(null=True)
     pass
 
 
