@@ -5,16 +5,17 @@ sys.path.append('..')
 
 from django.http import HttpResponse,JsonResponse
 from django.views import View
-# from utils.weather import search_weather
+from utils.weather import search_weather
 
 from .. import models
 
 
-class Weather(View):
+class WeatherInfo(View):
     def get(self,request):
-        # city = request.GET['city']
-        # res = search_weather(city)
-        # return HttpResponse(json.dumps(res),content_type='application/json')
+        city = request.GET['city']
+        # 先读缓存数据
+        res = search_weather(city)
+        return HttpResponse(json.dumps(res),content_type='application/json')
     
     def post(self,request):
         return HttpResponse('POST业务请求')

@@ -9,7 +9,28 @@ from config.const import Basic
 
 class UserInfo(View):
     def get(self,request):
-        pass
+        openid = None
+        search_res = {}
+        if 'openid' in request.GET:
+            openid = request.GET['openid']
+            try :
+                search_data = User.objects.get(openid=openid)
+                search_data = search_data.__dict__
+
+                filter_data = dict((key,value) for key,value in search_data.items() 
+                if key=='mobile' or key=='wechat_name' or key=='openid' or key=='wechat_photo'
+                or key=='address' or key=='gender')
+                
+                search_res['data'] = filter_data
+                search_res['code'] = 0
+                search_res['message'] = '查询成功'
+            except:
+                search_res['code'] = -1
+                search_res['message'] = '未找到该用户，查询失败'
+        else :
+            search_res['code'] = -1
+            search_res['message'] = '传参错误，查询失败'
+        return HttpResponse(json.dumps(search_res),content_type='application/json')
 
     def post(self,request):
         result_data = json.loads(request.body.decode())
@@ -37,12 +58,34 @@ class UserInfo(View):
                 register_response['message'] = '用户已存在或手机号已注册'
         else :
             register_response['code'] = -1 
-            register_response['message'] = '未找到openid，注册失败'
+            register_response['message'] = '未收到openid，注册失败'
         return HttpResponse(json.dumps(register_response),content_type='application/json')
         pass
     
     def put(self,request):
-        print('更新用户信息')
+        request_data = json.loads(request.body)
+        _openid = request_data['openid']
+        update_res = {}
+        if 'openid' in json.loads(request.body):
+            update_filter_data= dict((key,value) for key,value in request_data.items() if key != 'openid')
+            # print('过滤掉Openid',update_openid)
+            try :
+                update_one = User.objects.get(openid=_openid)
+                update_result = update_one.__dict__.update(**update_filter_data)
+                print('没走到')
+                update_res['code'] = 0
+                update_res['message'] = '更新成功'
+                update_res['data'] = update_result
+            except:
+                update_res['code'] = -1
+                update_res['message'] = '查询报错，更新失败'              
+        else :
+            print('没有Openid')
+            update_res['code'] = -1
+            update_res['message'] = '未收到openid，更新失败'
+            
+
+        return HttpResponse(json.dumps(update_res),content_type='application/json')
         pass
 
     def delete(self,request):
