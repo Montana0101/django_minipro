@@ -7,6 +7,9 @@ class User(models.Model):
     wechat_photo = models.CharField(max_length=200,null=True)
     address = models.CharField(max_length=200,null=True)
     gender = models.IntegerField(null=True)
+    province = models.CharField(max_length=50,null=True)
+    city = models.CharField(null=True, max_length=50)
+    area = models.CharField(max_length=50,null=True)
     pass
 
 

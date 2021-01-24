@@ -19,7 +19,7 @@ class UserInfo(View):
 
                 filter_data = dict((key,value) for key,value in search_data.items() 
                 if key=='mobile' or key=='wechat_name' or key=='openid' or key=='wechat_photo'
-                or key=='address' or key=='gender')
+                or key=='address' or key=='gender' or key=='province' or key=='city' or key=='area')
                 
                 search_res['data'] = filter_data
                 search_res['code'] = 0
@@ -68,14 +68,14 @@ class UserInfo(View):
         update_res = {}
         if 'openid' in json.loads(request.body):
             update_filter_data= dict((key,value) for key,value in request_data.items() if key != 'openid')
-            # print('过滤掉Openid',update_openid)
+            print('过滤掉Openid',update_filter_data)
             try :
                 update_one = User.objects.get(openid=_openid)
                 update_result = update_one.__dict__.update(**update_filter_data)
-                print('没走到')
+                update_one.save()  # 注意
                 update_res['code'] = 0
                 update_res['message'] = '更新成功'
-                update_res['data'] = update_result
+                # update_res['data'] = update_result
             except:
                 update_res['code'] = -1
                 update_res['message'] = '查询报错，更新失败'              
