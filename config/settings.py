@@ -68,7 +68,7 @@ DATABASES = {
         'NAME': 'weather',  
         'USER':'root',
         'PASSWORD':'141592',
-        'HOST':'127.0.0.1',
+        'HOST':'121.4.223.68',
         'PORT':'3306'
     }
 }
