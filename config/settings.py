@@ -13,7 +13,7 @@ SECRET_KEY = '5%3ehhu369(k1r-+$m$7s8+lk_6j5^u%^7-!mlx**&jy752hn*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0','localhost']
+ALLOWED_HOSTS = ['0.0.0.0','localhost','127.0.0.1']
 
 
 # Application definition
@@ -68,7 +68,7 @@ DATABASES = {
         'NAME': 'weather',  
         'USER':'root',
         'PASSWORD':'141592',
-        'HOST':'121.4.223.68',
+        'HOST':'127.0.0.1',
         'PORT':'3306'
     }
 }
